@@ -9,28 +9,26 @@ class Sender extends React.Component {
   constructor() {
     super();
     this.state = {
-      send: 'disable',
       value: ''
     };
   }
 
+  componentDidMount(){
+    this.refs.send.addEventListener("keypress", 13, function(){
+        this.send
+    });
+  }
+
   handleChange(e) {
     this.setState({ value: e.target.value });
-    if (this.refs.msg.props.value) {
-      this.setState({ send: '' });
-    }else{
-      this.setState({ send: 'disable'});
-    }
   }
 
   send(){
-    if (this.refs.msg.props.value == '') {
-      this.setState({ send: 'disable' });
-    } else {
-      let nickname = sessionStorage.getItem('nickname')
-      let send = `${nickname}: ${this.refs.msg.props.value}`
-      ws.send(send)
-    }
+    let nickname = sessionStorage.getItem('nickname')
+    let send = {"name":nickname, "msg": this.refs.msg.props.value}
+    console.log(send);
+    ws.send(JSON.stringify(send))
+    this.setState({ value: '' });
   }
 
   clear(){
@@ -49,8 +47,8 @@ class Sender extends React.Component {
             componentClass="textarea"
             onChange={this.handleChange.bind(this)}
           />
-          <Button bsStyle="primary" onClick={this.send.bind(this)}>发送</Button>
-          <Button bsStyle="danger" onClick={this.clear.bind(this)}>清屏</Button>
+          <Button ref="send" bsStyle="primary" onClick={this.send.bind(this)}>发送</Button>
+          <Button ref="clear" bsStyle="danger" onClick={this.clear.bind(this)}>清屏</Button>
         </div>
       </div>
     );

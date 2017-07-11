@@ -3,6 +3,8 @@ import config from '../../config'
 
 const ws = new WebSocket(`ws://${config.host}:${config.port}/${config.route}`);
 
+// console.log(`ws://${config.host}:${config.port}/${config.route}`);
+
 ws.onerror = function(err) {
   console.log('_error');
   console.log(err);
@@ -15,12 +17,12 @@ ws.onopen = function() {
 
 ws.onmessage = function(e) {
   let data = JSON.parse(e.data)
-  console.log(data);
   if (data.style == 'div') {
     $('#info').append(`<p name="msg">${data.time}</p>`)
     $('#info').append(`<p name="msg">${data.msg}</p>`)
   } else {
-    $('#info').append(`<div class="alert alert-${data.style}" name="msg">${data.msg}</div>`)
+    $('#info').append(`<p name="msg">${data.name}    ---    ${data.time}</p>`)
+    $('#info').append(`<div class="text-${data.style}" name="msg">${data.msg}</div>`)
   }
 };
 

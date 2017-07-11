@@ -19,6 +19,7 @@ let isLogin=new RegExp("加入了聊天室");
 // rule.second = times;
 // var c=0;
 
+// the web socket routes
 app.ws('/ws', function(ws, req) {
   util.inspect(ws);
   // let j = schedule.scheduleJob(rule, function(){
@@ -29,31 +30,34 @@ app.ws('/ws', function(ws, req) {
   //     client.send(JSON.stringify(send));
   //   });
   // });
+
   ws.on('message', function(msg) {
     let time = getNowFormatDate()
-    console.log(`${time}====>${msg}`);
+    console.log(`${time}====>${msg.name} : ${msg.msg}`);
     if (msg == 'link test') {
-      ws.send(`{"time":${time}, "style":"div", "msg":"连接服务器成功"}`)
+      ws.send(`{"time":"${time}", "style":"div", "msg":"连接服务器成功"}`)
     } else if (isLogin.test(msg)) {
       let aWss = expressWs.getWss('/ws');
       aWss.clients.forEach(function(client) {
-        send = {"time":time, "style":"div", "msg": `${msg}`}
+        send = {"time":time, "style":"div", "msg": msg.msg, "name": msg.name}
         client.send(JSON.stringify(send));
       });
     } else {
       let aWss = expressWs.getWss('/ws');
       aWss.clients.forEach(function(client) {
-        send = {"time":time, "style":`${style[a]}`, "msg": `${msg}`}
+        send = {"time": time, "style": style[a], "msg": msg.msg, "name": msg.name}
         client.send(JSON.stringify(send));
       });
-      a++
-      if (a > 2) {
+      if (a > 1) {
         a = 0
+      }else {
+        a++
       }
     }
   });
 })
 
+// format time
 const getNowFormatDate = () => {
     var date = new Date();
     var seperator1 = "-";
