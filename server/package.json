@@ -1,0 +1,12 @@
+{
+  "name": "kanrin_chat",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node app"
+  },
+  "dependencies": {
+    "express": "~4.13.4",
+    "express-ws": "^3.0.0"
+  }
+}
