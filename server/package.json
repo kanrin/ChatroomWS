@@ -1,5 +1,6 @@
 {
   "name": "kanrin_chat",
+  "author": "Orz",
   "version": "0.0.0",
   "private": true,
   "scripts": {

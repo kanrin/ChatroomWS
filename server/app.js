@@ -33,17 +33,18 @@ app.ws('/ws', function(ws, req) {
 
   ws.on('message', function(msg) {
     let time = getNowFormatDate()
-    console.log(`${time}====>${msg.name} : ${msg.msg}`);
+    console.log(`${time}====>${msg}`);
     if (msg == 'link test') {
       ws.send(`{"time":"${time}", "style":"div", "msg":"连接服务器成功"}`)
     } else if (isLogin.test(msg)) {
       let aWss = expressWs.getWss('/ws');
       aWss.clients.forEach(function(client) {
-        send = {"time":time, "style":"div", "msg": msg.msg, "name": msg.name}
+        send = {"time":time, "style":"div", "msg": msg, "name": msg.name}
         client.send(JSON.stringify(send));
       });
     } else {
       let aWss = expressWs.getWss('/ws');
+      msg = JSON.parse(msg)
       aWss.clients.forEach(function(client) {
         send = {"time": time, "style": style[a], "msg": msg.msg, "name": msg.name}
         client.send(JSON.stringify(send));
