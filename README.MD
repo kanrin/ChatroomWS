@@ -1,7 +1,7 @@
 # Chatroom with WebSocket
 
 
-## env
+## Env
 - nodejs 8.1.0+
 
 ## Server
@@ -9,6 +9,7 @@
 - npm start
 
 ## Client
+- on the frist run `npm i`
 - debug `npm run dev`
 - build `npm run build`
 >update the build file on your web server[I'm use the nginx]
