@@ -23,3 +23,6 @@
 
 ## 启动服务器
 - `npm start`**默认端口3000**
+
+## 实例地址(DEOM)
+- [chat.kanrin.win](http://chat.kanrin.win/)
