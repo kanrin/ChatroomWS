@@ -1,15 +1,25 @@
 # Chatroom with WebSocket
 
 
-## Env
-- nodejs 8.1.0+
+>英文太烂就用中文写了  
 
-## Server
-- npm i
-- npm start
+## 环境
+- nodejs
 
-## Client
-- on the frist run `npm i`
-- debug `npm run dev`
-- build `npm run build`
->update the build file on your web server[I'm use the nginx]
+## 开发依赖
+- react
+- react-router
+- react-bootstrap
+- webpack
+- express
+- express-ws
+
+## 构建
+***
+### 服务端
+- `npm install`
+### 客户端
+- `npm install;npm run build`
+
+## 启动服务器
+- `npm start`**默认端口3000**

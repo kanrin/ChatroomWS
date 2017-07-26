@@ -1,8 +1,9 @@
 import React from 'react';
 import $ from 'jquery'
 import classNames from 'classnames'
-import {Col, FormControl, Button} from 'react-bootstrap'
+import {Col, FormControl, Button, ButtonGroup} from 'react-bootstrap'
 import ws from '../WebSocket'
+import style from './style.css'
 
 
 class Sender extends React.Component {
@@ -13,12 +14,6 @@ class Sender extends React.Component {
     };
   }
 
-  componentDidMount(){
-    this.refs.send.addEventListener("keypress", 13, function(){
-        this.send
-    });
-  }
-
   handleChange(e) {
     this.setState({ value: e.target.value });
   }
@@ -26,7 +21,6 @@ class Sender extends React.Component {
   send(){
     let nickname = sessionStorage.getItem('nickname')
     let send = {"name":nickname, "msg": this.refs.msg.props.value}
-    console.log(send);
     ws.send(JSON.stringify(send))
     this.setState({ value: '' });
   }
@@ -38,18 +32,25 @@ class Sender extends React.Component {
 
   render() {
     return (
-      <div id="container row">
+      <div className="row">
         <div id="info" className="center-block">
           <FormControl
+            className={style.text}
             ref="msg"
             type="text"
             value={this.state.value}
             componentClass="textarea"
             onChange={this.handleChange.bind(this)}
           />
-          <Button ref="send" bsStyle="primary" onClick={this.send.bind(this)}>发送</Button>
-          <Button ref="clear" bsStyle="danger" onClick={this.clear.bind(this)}>清屏</Button>
         </div>
+        <ButtonGroup justified>
+          <ButtonGroup>
+            <Button ref="send" bsStyle="primary" onClick={this.send.bind(this)}>发送</Button>
+          </ButtonGroup>
+          <ButtonGroup>
+            <Button ref="clear" bsStyle="danger" onClick={this.clear.bind(this)}>清屏</Button>
+          </ButtonGroup>
+        </ButtonGroup>
       </div>
     );
   }

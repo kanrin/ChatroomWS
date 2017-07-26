@@ -5,31 +5,31 @@ const path = require('path');
 const util = require('util');
 const {execSync} = require('child_process');
 app.use(express.static(path.join(__dirname, 'static')));
-// const schedule = require("node-schedule");
+const schedule = require("node-schedule");
 
 const style = ['danger', 'warning', 'success']
 let a = 0
 let isLogin=new RegExp("加入了聊天室");
 
-// const rule = new schedule.RecurrenceRule();
-// let times = [];
-// for(var i=1; i<60; i+=5){
-//   times.push(i);
-// }
-// rule.second = times;
-// var c=0;
+const rule = new schedule.RecurrenceRule();
+const times = [1,6,11,16,21,26,31,36,41,46,51,56];
+rule.second  = times;
 
 // the web socket routes
-app.ws('/ws', function(ws, req) {
+app.ws('/chat', function(ws, req) {
   util.inspect(ws);
-  // let j = schedule.scheduleJob(rule, function(){
-  //   let aWss = expressWs.getWss('/ws');
-  //   let num = aWss.clients.length
-  //   aWss.clients.forEach(function(client) {
-  //     send = {"time":time, "style":"div", "msg": `${num}`}
-  //     client.send(JSON.stringify(send));
-  //   });
-  // });
+
+  schedule.scheduleJob(rule, function(){
+    let aWss = expressWs.getWss('/chat');
+    let num = 0
+    aWss.clients.forEach(function(client) {
+      num++
+    });
+    aWss.clients.forEach(function(client) {
+      send = {"style":"online", "num": num}
+      client.send(JSON.stringify(send));
+    });
+  });
 
   ws.on('message', function(msg) {
     let time = getNowFormatDate()
@@ -37,13 +37,13 @@ app.ws('/ws', function(ws, req) {
     if (msg == 'link test') {
       ws.send(`{"time":"${time}", "style":"div", "msg":"连接服务器成功"}`)
     } else if (isLogin.test(msg)) {
-      let aWss = expressWs.getWss('/ws');
+      let aWss = expressWs.getWss('/chat');
       aWss.clients.forEach(function(client) {
         send = {"time":time, "style":"div", "msg": msg, "name": msg.name}
         client.send(JSON.stringify(send));
       });
     } else {
-      let aWss = expressWs.getWss('/ws');
+      let aWss = expressWs.getWss('/chat');
       msg = JSON.parse(msg)
       aWss.clients.forEach(function(client) {
         send = {"time": time, "style": style[a], "msg": msg.msg, "name": msg.name}

@@ -1,5 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
+const htmlWebpackPlugin = require('html-webpack-plugin');
+
 
 module.exports = {
     entry: './main.js',
@@ -27,6 +29,12 @@ module.exports = {
             compress: {
                 warnings: false
             }
+        }),
+        new htmlWebpackPlugin({
+            title: 'ChatroomWS',
+            filename: 'index.html',
+            template: 'index.html',
+            inject: 'body'
         })
     ]
 }

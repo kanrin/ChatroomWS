@@ -1,5 +1,5 @@
 {
   "host":"chat.kanrin.win",
   "port":3000,
-  "route":"ws"
+  "route":"chat"
 }

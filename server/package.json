@@ -1,13 +1,14 @@
 {
   "name": "kanrin_chat",
   "author": "Orz",
-  "version": "0.0.0",
+  "version": "1.0.1",
   "private": true,
   "scripts": {
     "start": "node app"
   },
   "dependencies": {
     "express": "~4.13.4",
-    "express-ws": "^3.0.0"
+    "express-ws": "^3.0.0",
+    "node-schedule": "^1.2.3"
   }
 }
