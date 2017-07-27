@@ -24,12 +24,19 @@ ws.onmessage = function(e) {
   } else if (data.style == 'online') {
     $('#online').text(data.num)
   } else {
+    let msg = data.msg.split('\n')
     if (data.name === sessionStorage.getItem('nickname')) {
       $('#info').append(`<div name="msg" class="text-right">${data.name}    ---    ${data.time}</div>`)
-      $('#info').append(`<div class="text-success text-right" id="msg${msgnum}" name="msg">${data.msg}</div>`)
+      msg.map((m) => {
+        msgnum++
+        $('#info').append(`<div class="text-success text-right" id="msg${msgnum}" name="msg">${m}</div>`)
+      })
     } else {
       $('#info').append(`<div name="msg">${data.name}    ---    ${data.time}</div>`)
-      $('#info').append(`<div name="msg" id="msg${msgnum}">${data.msg}</div>`)
+      msg.map((m) => {
+        msgnum++
+        $('#info').append(`<div id="msg${msgnum}" name="msg">${m}</div>`)
+      })
     }
     document.getElementById(`msg${msgnum}`).scrollIntoView();
   }
@@ -37,6 +44,7 @@ ws.onmessage = function(e) {
 
 ws.onclose = function() {
   console.log('_close');
+  $('#info').append(`<div name="msg" class="text-center text-danger">与服务器断开链接</div>`)
 };
 
 function send() {
