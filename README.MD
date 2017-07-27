@@ -16,6 +16,7 @@
 
 ## 构建
 ### 服务端
+- `npm install -g forever`
 - `npm install`
 ### 客户端
 - `npm install;npm run build`

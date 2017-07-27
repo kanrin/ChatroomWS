@@ -1,10 +1,12 @@
 {
-  "name": "kanrin_chat",
+  "name": "chatroom_server",
   "author": "Orz",
   "version": "1.0.1",
   "private": true,
   "scripts": {
-    "start": "node app"
+    "dev": "node app",
+    "start": "forever start -l chatroom_server.log -a ./app.js",
+    "stop": "forever stop ./app.js"
   },
   "dependencies": {
     "express": "~4.13.4",
