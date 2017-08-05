@@ -1,5 +1,84 @@
 :local .chat{
-  overflow-y:scroll;
-  background: #c0dafc;
-  width: 100%;
+  background: #cfe5ff
+}
+
+:local .bubbleDiv{
+    background: #cfe5ff;
+    overflow-y:scroll;
+}
+:local .bubbleItem{
+    width: 100%;
+}
+:local .bubble{
+    max-width: 655px;
+    position: relative;
+    line-height: 30px;
+    padding-left: 10px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-radius: 7px;
+    margin-top: 15px;
+    padding-right: 10px;
+    display: inline-block;
+}
+:local .leftBubble{
+    position: relative;
+    margin-left: 25px;
+    border: 1px solid #3a65a7;
+    background-color: #d2cbff;
+}
+:local .leftBubble .bottomLevel{
+    position: absolute;
+    top: 10px;
+    left: -10px;
+    border-top: 10px solid #3a65a7;
+    border-left: 10px solid transparent;
+}
+:local .leftBubble .topLevel{
+    position: absolute;
+    top: 11px;
+    left: -8px;
+    border-top: 10px solid #d2cbff;
+    border-left: 10px solid transparent;
+    z-index: 100;
+}
+:local .rightBubble{
+    position: relative;
+    margin-right: 25px;
+    float: right;
+    border: 1px solid #aaa;
+}
+:local .rightBubble .bottomLevel{
+    position: absolute;
+    bottom: 11px;
+    right: -10px;
+    border-bottom: 10px solid #aaa;
+    border-right: 10px solid transparent;
+}
+:local .rightBubble .topLevel{
+    position: absolute;
+    bottom: 12px;
+    right: -8px;
+    border-bottom: 10px solid #cfe5ff;
+    border-right: 10px solid transparent;
+    z-index: 100;
+}
+:local .clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+:local .roundLeft{
+  background: #f6d2ff;
+  height: 30px;
+  border-radius:15px;
+  border: 1px solid #fc9191;
+  vertical-align:text-top;
+  float: left;
+  text-align: center;
+  font-size: 20px;
 }

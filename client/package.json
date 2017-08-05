@@ -1,7 +1,7 @@
 {
   "name": "chatroom_client",
   "author": "Orz",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "scripts": {
     "build": "webpack",

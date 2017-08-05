@@ -10,13 +10,18 @@ class LoginModal extends React.Component {
     this.state = {
       login: true,
       check:false,
+      isconnect:false,
       value: ''
     };
   }
 
   getValidationState() {
     const length = this.state.value.length;
-    if (length >0) return 'success';
+    if (length >0 && this.state.isconnect) {
+      return 'success';
+    }else{
+      return 'error';
+    }
   }
 
   handleChange(e) {
@@ -36,6 +41,15 @@ class LoginModal extends React.Component {
 
   checkClose(){
     this.setState({ check: false });
+  }
+
+  componentDidMount(){
+    let _this = this
+    ws.onopen = function() {
+      console.log('_connect')
+      _this.setState({isconnect: true})
+      $('#join').removeAttr('disabled');
+    };
   }
 
   render() {
@@ -62,7 +76,7 @@ class LoginModal extends React.Component {
           </FormGroup>
         </Modal.Body>
         <Modal.Footer>
-          <Button bsStyle="primary" onClick={this.sublimt.bind(this)}>加入</Button>
+          <Button bsStyle="primary" id="join" onClick={this.sublimt.bind(this)}>加入</Button>
         </Modal.Footer>
       </Modal>
       <Modal show={this.state.check}>

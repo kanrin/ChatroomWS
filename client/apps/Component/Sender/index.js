@@ -23,6 +23,7 @@ class Sender extends React.Component {
     if (this.refs.msg.props.value) {
       let nickname = sessionStorage.getItem('nickname')
       let send = {"name":nickname, "msg": this.refs.msg.props.value}
+      console.log(send);
       ws.send(JSON.stringify(send))
       this.setState({ value: '' });
     } else {
