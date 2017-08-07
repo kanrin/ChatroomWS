@@ -45,10 +45,19 @@ class Chat extends React.Component {
         default:
           switch (data.name) {
             case sessionStorage.getItem('nickname'):
-              $('#info').append(`<div name="msg" id="msg${msgnum}" class="${style.bubbleItem} ${style.clearfix}"><span name="msg" class="${style.bubble} ${style.rightBubble}">${msg.split('\n').join('<br>')}<span name="msg" class="${style.bottomLevel}"></span><span name="msg" class="${style.topLevel}"></span></span></div>`)
+            console.log(data.type);
+              if(data.type === 'img'){
+                $('#info').append(`<div name="msg" id="msg${msgnum}" class="${style.bubbleItem} ${style.clearfix}"><span name="msg" class="${style.bubble} ${style.rightBubble}"><img name="msg" src="${msg}"/><span name="msg" class="${style.bottomLevel}"></span><span name="msg" class="${style.topLevel}"></span></span></div>`)
+              }else{
+                $('#info').append(`<div name="msg" id="msg${msgnum}" class="${style.bubbleItem} ${style.clearfix}"><span name="msg" class="${style.bubble} ${style.rightBubble}">${msg.split('\n').join('<br>')}<span name="msg" class="${style.bottomLevel}"></span><span name="msg" class="${style.topLevel}"></span></span></div>`)
+              }
               break;
             default:
-              $('#info').append(`<div name="msg" class="${style.roundLeft}">${data.name}</div><div name="msg" id="msg${msgnum}" class="${style.bubbleItem}"><span name="msg" class="${style.bubble} ${style.leftBubble}">${msg.split('\n').join('<br>')}<span name="msg" class="${style.bottomLevel}"></span><span name="msg" class="${style.topLevel}"></span></span></div>`)
+              if (data.type === 'img') {
+                $('#info').append(`<div name="msg" class="${style.roundLeft}">${data.name}</div><div name="msg" id="msg${msgnum}" class="${style.bubbleItem}"><span name="msg" class="${style.bubble} ${style.leftBubble}"><img name="msg" class=${style.img}/><span name="msg" class="${style.bottomLevel}"></span><span name="msg" class="${style.topLevel}"></span></span></div>`)
+              } else {
+                $('#info').append(`<div name="msg" class="${style.roundLeft}">${data.name}</div><div name="msg" id="msg${msgnum}" class="${style.bubbleItem}"><span name="msg" class="${style.bubble} ${style.leftBubble}">${msg.split('\n').join('<br>')}<span name="msg" class="${style.bottomLevel}"></span><span name="msg" class="${style.topLevel}"></span></span></div>`)
+              }
           }
           // $('#info').append(`<div name="msg" class="text-left">${data.name} -- ${data.time}</div>`)
 

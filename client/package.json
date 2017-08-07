@@ -19,8 +19,11 @@
     "webpack": "^3.0.0"
   },
   "dependencies": {
+    "base64-img": "^1.0.3",
     "bootstrap": "^3.3.7",
     "classnames": "^2.2.5",
+    "file-system": "^2.2.2",
+    "fs": "0.0.1-security",
     "html-webpack-plugin": "^2.29.0",
     "jquery": "^3.2.1",
     "react": "^15.6.1",

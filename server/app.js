@@ -46,7 +46,7 @@ app.ws('/chat', function(ws, req) {
       let aWss = expressWs.getWss('/chat');
       msg = JSON.parse(msg)
       aWss.clients.forEach(function(client) {
-        send = {"time": time, "style": style[a], "msg": msg.msg, "name": msg.name}
+        send = {"time": time, "style": style[a], "msg": msg.msg, "name": msg.name, "type": msg.type}
         client.send(JSON.stringify(send));
       });
       if (a > 1) {
